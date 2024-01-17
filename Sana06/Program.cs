@@ -1,9 +1,10 @@
 ﻿using ClassLibrary;
 using System.IO;
 using System.Text;
-
-Console.InputEncoding = Encoding.Unicode;
-Console.OutputEncoding = Encoding.Unicode;
+try
+{
+    Console.InputEncoding = Encoding.Unicode;
+    Console.OutputEncoding = Encoding.Unicode;
     People[] peoples = new People[5];
     peoples[0] = new People("Viktoria", "Korzhovska", new DateTime(2005, 12, 29));
     peoples[1] = new Applicant("Viktoria", "Korzhovska", new DateTime(2005, 12, 29), 169, 11, "School 2");
@@ -14,3 +15,23 @@ Console.OutputEncoding = Encoding.Unicode;
     {
         Console.WriteLine(peoples[i].ShowInfo());
     }
+}
+catch (ZNOException ex)
+{
+    Console.WriteLine(ex.Message);
+    Console.WriteLine($"Використано бал ЗНО: {ex.ZNO}");
+}
+catch (PointsException ex)
+{
+    Console.WriteLine(ex.Message);
+    Console.WriteLine($"Використано бал: {ex.Points}");
+}
+catch (CourseException ex)
+{
+    Console.WriteLine(ex.Message);
+    Console.WriteLine($"Введений курс: {ex.Course}");
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex.Message);
+}
